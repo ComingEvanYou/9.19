@@ -5,6 +5,6 @@ module.exports = defineConfig({
     port:6888,
     host:"localhost",
     open:true,
-    https:false,
+    https:false
   }
 })
