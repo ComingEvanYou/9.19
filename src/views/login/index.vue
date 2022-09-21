@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import {login} from "../../api/user"
 export default {
   data() {
     return {
@@ -42,9 +43,18 @@ export default {
     };
   },
   methods: {
+    //登录校验
     handleLoginSubmit() {
-        
+        this.$refs['ruleForm'].validate(valid => {
+            if(!valid) return
+            this.handleLogin()
+        })
     },
+    //
+    async handleLogin(){
+        const response = await login(this.loginForm)
+        console.log(response.token);
+    }
   },
 };
 </script>
