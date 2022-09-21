@@ -9,6 +9,11 @@ const routes = [
     path: '/Login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/',
+    name: 'index',
+    component: () => import('../layout')
   }
 ]
 

@@ -23,7 +23,8 @@
   </div>
 </template>
 <script>
-import {login} from "../../api/user"
+import { login, getUser } from "../../api/user";
+
 export default {
   data() {
     return {
@@ -36,25 +37,37 @@ export default {
           { required: true, message: "账号不能为空", trigger: "blur" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
         ],
-         password: [
-          { required: true, message: "密码不能为空", trigger: "blur" }
-        ]
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+        ],
       },
     };
   },
   methods: {
     //登录校验
     handleLoginSubmit() {
-        this.$refs['ruleForm'].validate(valid => {
-            if(!valid) return
-            this.handleLogin()
-        })
+      this.$refs["ruleForm"].validate((valid) => {
+        if (!valid) return;
+        this.handleLogin();
+      });
     },
     //
-    async handleLogin(){
-        const response = await login(this.loginForm)
-        console.log(response.token);
-    }
+    async handleLogin() {
+      try {
+        //调用登录接口
+        const response = await login(this.loginForm);
+        //把token存到本地
+        this.$store.dispatch("DIS_SET_TOKEN", response.token);
+        //调用用户信息接口
+        const userInfo = await getUser();
+        //把获取到的用户信息存到本地
+        this.$store.dispatch("DIS_SET_USERINFO", userInfo);
+        this.$message.success('登录成功')
+        this.$router.push('/')
+      } catch {
+
+      }
+    },
   },
 };
 </script>
@@ -72,12 +85,12 @@ export default {
   border-radius: 20px;
   padding: 28px;
 }
-.login-title{
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
+.login-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
 }
-.el-form{
-    margin-top: 20px;
+.el-form {
+  margin-top: 20px;
 }
 </style>
