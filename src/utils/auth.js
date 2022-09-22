@@ -7,7 +7,7 @@ export const setToken = (token) => {
 }
 
 export const getToken = () => {
-   return localStorage.setItem(TOKEN_KEY)
+   return localStorage.getItem(TOKEN_KEY)
 }
 
 export const setUserInfo = (userInfo) => {
@@ -15,7 +15,7 @@ export const setUserInfo = (userInfo) => {
 }
 
 export const getUserInfo = () => {
-   return JSON.parse(localStorage.setItem(USERINFO_KEY) || "{}")
+   return JSON.parse(localStorage.getItem(USERINFO_KEY) || "{}")
 }
 
 export const removeTokenAdduserInfo = () => {

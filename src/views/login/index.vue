@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { login, getUser } from "../../api/user";
+
 
 export default {
   data() {
@@ -53,20 +53,29 @@ export default {
     },
     //
     async handleLogin() {
-      try {
-        //调用登录接口
-        const response = await login(this.loginForm);
-        //把token存到本地
-        this.$store.dispatch("DIS_SET_TOKEN", response.token);
-        //调用用户信息接口
-        const userInfo = await getUser();
-        //把获取到的用户信息存到本地
-        this.$store.dispatch("DIS_SET_USERINFO", userInfo);
-        this.$message.success('登录成功')
+      try{
+        const token = await this.$store.dispatch('loginMethods',this.loginForm)
+        if(!token) return
+        const userInfo = await this.$store.dispatch('handleUser')
+        if(!userInfo) return
         this.$router.push('/')
-      } catch {
-
+      }catch(e){
+        console.log(e.message)
       }
+      // try {
+      //   //调用登录接口
+      //   const response = await login(this.loginForm);
+      //   //把token存到本地
+      //   this.$store.dispatch("DIS_SET_TOKEN", response.token);
+      //   //调用用户信息接口
+      //   const userInfo = await getUser();
+      //   //把获取到的用户信息存到本地
+      //   this.$store.dispatch("DIS_SET_USERINFO", userInfo);
+      //   this.$message.success('登录成功')
+      //   this.$router.push('/')
+      // } catch {
+
+      // }
     },
   },
 };
