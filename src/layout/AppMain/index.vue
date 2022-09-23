@@ -12,7 +12,7 @@ export default {
     },
     computed:{
         controllLink(){
-            return (this.$route.path !== "/index")
+            return (this.$route.path !== "/home")
         }
     }
 }

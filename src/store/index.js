@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { getToken , getUserInfo ,setToken , setUserInfo} from "../utils/auth"
-import { login, getUser } from "../api/user";
+import { login, getUser , logout} from "../api/user";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -51,6 +51,16 @@ export default new Vuex.Store({
       return user
       }catch(e){
         console.log(e.message)
+      }
+    },
+    async handleLogout ({commit}){
+      try{
+        const response = await logout()
+        commit('SET_TOKEN','')
+        commit('SET_USERINFO','')
+        return response
+      }catch{
+
       }
     }
   },

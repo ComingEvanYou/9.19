@@ -21,6 +21,9 @@ export default {
 };
 </script>
 <style lang="scss">
+.linkPage{
+  margin-bottom: 20px;
+}
 .el-breadcrumb {
   height: 10px;
   padding: 20px;

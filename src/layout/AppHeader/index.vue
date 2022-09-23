@@ -31,8 +31,16 @@ export default {
         handleChangePassword(){
             alert('修改密码')
         },
-        handleLogout(){
-            alert('退出登录')
+       async handleLogout(){
+         try{
+            const response = await this.$store.dispatch('handleLogout')
+            setTimeout(() => {
+                this.$router.push('/login')
+            }, 100);
+            this.$message.success('退出成功')
+         }catch(e){
+            console.log(e.message)
+         }
         }
     },
 }
