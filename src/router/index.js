@@ -55,6 +55,38 @@ const routes = [
           title:"员工管理"
         },
         component: () => import ('../views/staff')
+      },
+      {
+        path:"staff1",
+        name:"staff1",
+        meta:{
+          title:"员工管理"
+        },
+        component: () => import ('../views/staff/index1')
+      },
+      {
+        path:"goods1",
+        name:"goods1",
+        meta:{
+          title:"商品管理"
+        },
+        component: () => import ('../views/goods/index1.vue')
+      },
+      {
+        path:"supplier1",
+        name:"supplier1",
+        meta:{
+          title:"供应商管理"
+        },
+        component: () => import ('../views/supplier/index1')
+      },
+      {
+        path:"member1",
+        name:"member1",
+        meta:{
+          title:"供应商管理"
+        },
+        component: () => import ('../views/member/index1')
       }
     ]
   }
